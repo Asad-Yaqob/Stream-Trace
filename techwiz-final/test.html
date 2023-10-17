@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Slider Example</title>
+    <style>
+        /* Your existing styles */
+
+        /* New styles for the slider */
+        .slider {
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transition: opacity 0.5s ease-in-out;
+            opacity: 0;
+        }
+
+        .slider .slide.active {
+            opacity: 1;
+        }
+
+        /* Previous and Next buttons */
+        .prev-next-btns {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .prev-next-btns button {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .prev-next-btns button.prev {
+            margin-left: 20px;
+        }
+
+        .prev-next-btns button.next {
+            margin-right: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="slider" id="main">
+            <div class="slide active" style="background-image: url('assets/images/b.jpg');"></div>
+            <div class="slide" style="background-image: url('assets/images/arranged\ love.jpg');"></div>
+            <div class="slide" style="background-image: url('assets/images/slide3.jpg');"></div>
+            <!-- Add more slides as needed -->
+
+            <!-- Previous and Next buttons -->
+            <div class="prev-next-btns">
+                <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+                <button class="next" onclick="changeSlide(1)">&#10095;</button>
+            </div>
+        </div>
+    </header>
+
+    <script>
+        // JavaScript to control the slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+
+        function showSlide(slideIndex) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[slideIndex].classList.add('active');
+            currentSlide = slideIndex;
+        }
+
+        function changeSlide(n) {
+            currentSlide += n;
+            if (currentSlide >= slides.length) {
+                currentSlide = 0;
+            } else if (currentSlide < 0) {
+                currentSlide = slides.length - 1;
+            }
+            showSlide(currentSlide);
+        }
+
+        // Start the slider
+        showSlide(currentSlide);
+    </script>
+</body>
+
+</html>
